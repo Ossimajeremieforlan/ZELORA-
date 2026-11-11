@@ -1,26 +1,30 @@
 /* =========================================
    ZELORA — Catalogue, recherche et panier
-   Version de démonstration : aucun achat réel
+   Prix indicatifs en FCFA — démonstration
 ========================================= */
 (() => {
   "use strict";
 
   const products = [
-    { id: 1, name: "T-shirt Essential", category: "Mode", symbol: "✦" },
-    { id: 2, name: "Ensemble Streetwear", category: "Mode", symbol: "♧" },
-    { id: 3, name: "Chemise classique", category: "Mode", symbol: "◇" },
-    { id: 4, name: "Sneakers Urban", category: "Chaussures", symbol: "◒" },
-    { id: 5, name: "Baskets Sport", category: "Chaussures", symbol: "◉" },
-    { id: 6, name: "Sac tendance", category: "Accessoires", symbol: "▱" },
-    { id: 7, name: "Casquette Premium", category: "Accessoires", symbol: "⌂" },
-    { id: 8, name: "Ensemble sportif", category: "Sport", symbol: "⚽" },
-    { id: 9, name: "Maillot de sport", category: "Sport", symbol: "✧" },
-    { id: 10, name: "Soin beauté", category: "Beauté", symbol: "❀" },
-    { id: 11, name: "Accessoire beauté", category: "Beauté", symbol: "✿" },
-    { id: 12, name: "Décoration maison", category: "Maison", symbol: "⌂" }
+    { id: 1, name: "T-shirt Essential", category: "Mode", symbol: "✦", price: 5000 },
+    { id: 2, name: "Ensemble Streetwear", category: "Mode", symbol: "♧", price: 15000 },
+    { id: 3, name: "Chemise classique", category: "Mode", symbol: "◇", price: 8000 },
+    { id: 4, name: "Sneakers Urban", category: "Chaussures", symbol: "◒", price: 18000 },
+    { id: 5, name: "Baskets Sport", category: "Chaussures", symbol: "◉", price: 15000 },
+    { id: 6, name: "Sac tendance", category: "Accessoires", symbol: "▱", price: 10000 },
+    { id: 7, name: "Casquette Premium", category: "Accessoires", symbol: "⌂", price: 4000 },
+    { id: 8, name: "Ensemble sportif", category: "Sport", symbol: "⚽", price: 12000 },
+    { id: 9, name: "Maillot de sport", category: "Sport", symbol: "✧", price: 8000 },
+    { id: 10, name: "Soin beauté", category: "Beauté", symbol: "❀", price: 5000 },
+    { id: 11, name: "Accessoire beauté", category: "Beauté", symbol: "✿", price: 3000 },
+    { id: 12, name: "Décoration maison", category: "Maison", symbol: "⌂", price: 7000 }
   ];
 
+  const money = value =>
+    `${value.toLocaleString("fr-FR")} FCFA`;
+
   const $ = id => document.getElementById(id);
+
   const grid = $("productGrid");
   const search = $("searchInput");
   const categories = $("categoryGrid");
@@ -30,30 +34,41 @@
   const drawer = $("cartDrawer");
   const backdrop = $("drawerBackdrop");
   const toast = $("toast");
+
   const cart = new Map();
+
   let activeCategory = "Tout";
   let toastTimer;
 
-  const escapeHTML = value => String(value).replace(/[&<>"']/g, char => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#39;"
-  })[char]);
+  const escapeHTML = value =>
+    String(value).replace(/[&<>"']/g, char => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;"
+    })[char]);
 
   function showNotice(message) {
     if (!toast) return;
+
     toast.textContent = message;
     toast.classList.add("show");
+
     clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => toast.classList.remove("show"), 2400);
+
+    toastTimer = setTimeout(
+      () => toast.classList.remove("show"),
+      2400
+    );
   }
 
   function renderProducts() {
     if (!grid) return;
 
-    const term = (search?.value || "").trim().toLocaleLowerCase("fr");
+    const term = (search?.value || "")
+      .trim()
+      .toLocaleLowerCase("fr");
 
     const filtered = products.filter(product => {
       const categoryMatch =
@@ -70,14 +85,19 @@
 
     grid.innerHTML = filtered.map(product => `
       <article class="product-card">
+
         <div class="product-visual">
           <span class="visual-symbol" aria-hidden="true">
             ${product.symbol}
           </span>
-          <span class="visual-label">ZELORA · EXEMPLE</span>
+
+          <span class="visual-label">
+            ZELORA · VISUEL PROVISOIRE
+          </span>
         </div>
 
         <div class="product-info">
+
           <span class="product-category">
             ${escapeHTML(product.category)}
           </span>
@@ -85,22 +105,32 @@
           <h3>${escapeHTML(product.name)}</h3>
 
           <p class="product-note">
-            Exemple visuel — article non disponible à la vente
+            Visuel de présentation — article à confirmer auprès d'un vendeur
           </p>
 
           <div class="product-bottom">
-            <span class="product-price">Prix à définir</span>
-            <button class="add-button" type="button"
+
+            <span class="product-price">
+              ${money(product.price)}
+            </span>
+
+            <button
+              class="add-button"
+              type="button"
               data-add="${product.id}">
-              Ajouter au test
+              Ajouter au panier
             </button>
+
           </div>
         </div>
       </article>
     `).join("");
 
     const empty = $("emptyState");
-    if (empty) empty.hidden = filtered.length > 0;
+
+    if (empty) {
+      empty.hidden = filtered.length > 0;
+    }
   }
 
   function renderCart() {
@@ -111,34 +141,62 @@
       0
     );
 
-    if (count) count.textContent = String(quantity);
-    if (total) total.textContent = "À définir";
+    const cartTotal = rows.reduce((sum, [id, amount]) => {
+      const product = products.find(item => item.id === id);
+
+      return sum + (product
+        ? product.price * amount
+        : 0);
+    }, 0);
+
+    if (count) {
+      count.textContent = String(quantity);
+    }
+
+    if (total) {
+      total.textContent = money(cartTotal);
+    }
 
     if (!items) return;
 
     items.innerHTML = rows.length
       ? rows.map(([id, amount]) => {
-          const product = products.find(item => item.id === id);
+          const product = products.find(
+            item => item.id === id
+          );
+
+          if (!product) return "";
 
           return `
             <div class="cart-row">
+
               <div class="cart-thumb" aria-hidden="true">
                 ${product.symbol}
               </div>
 
               <div class="cart-row-info">
                 <b>${escapeHTML(product.name)}</b>
-                <small>Exemple · prix non défini</small>
+                <small>${money(product.price)} / unité</small>
               </div>
 
               <div class="quantity-controls">
-                <button type="button" data-minus="${id}"
-                  aria-label="Retirer un exemplaire">−</button>
+
+                <button
+                  type="button"
+                  data-minus="${id}"
+                  aria-label="Retirer un exemplaire">
+                  −
+                </button>
 
                 <span>${amount}</span>
 
-                <button type="button" data-plus="${id}"
-                  aria-label="Ajouter un exemplaire">+</button>
+                <button
+                  type="button"
+                  data-plus="${id}"
+                  aria-label="Ajouter un exemplaire">
+                  +
+                </button>
+
               </div>
             </div>
           `;
@@ -148,32 +206,51 @@
 
   function openCart() {
     drawer?.classList.add("open");
-    drawer?.setAttribute("aria-hidden", "false");
 
-    if (backdrop) backdrop.hidden = false;
+    drawer?.setAttribute(
+      "aria-hidden",
+      "false"
+    );
+
+    if (backdrop) {
+      backdrop.hidden = false;
+    }
 
     document.body.style.overflow = "hidden";
   }
 
   function closeCart() {
     drawer?.classList.remove("open");
-    drawer?.setAttribute("aria-hidden", "true");
 
-    if (backdrop) backdrop.hidden = true;
+    drawer?.setAttribute(
+      "aria-hidden",
+      "true"
+    );
+
+    if (backdrop) {
+      backdrop.hidden = true;
+    }
 
     document.body.style.overflow = "";
   }
 
   grid?.addEventListener("click", event => {
     const button = event.target.closest("[data-add]");
+
     if (!button) return;
 
     const id = Number(button.dataset.add);
 
-    cart.set(id, (cart.get(id) || 0) + 1);
+    cart.set(
+      id,
+      (cart.get(id) || 0) + 1
+    );
 
     renderCart();
-    showNotice("Article ajouté au panier de démonstration.");
+
+    showNotice(
+      "Article ajouté au panier de démonstration."
+    );
   });
 
   items?.addEventListener("click", event => {
@@ -182,31 +259,48 @@
 
     if (plus) {
       const id = Number(plus.dataset.plus);
-      cart.set(id, (cart.get(id) || 0) + 1);
+
+      cart.set(
+        id,
+        (cart.get(id) || 0) + 1
+      );
     }
 
     if (minus) {
       const id = Number(minus.dataset.minus);
+
       const next = (cart.get(id) || 0) - 1;
 
-      if (next <= 0) cart.delete(id);
-      else cart.set(id, next);
+      if (next <= 0) {
+        cart.delete(id);
+      } else {
+        cart.set(id, next);
+      }
     }
 
     renderCart();
   });
 
-  search?.addEventListener("input", renderProducts);
+  search?.addEventListener(
+    "input",
+    renderProducts
+  );
 
   categories?.addEventListener("click", event => {
     const button = event.target.closest("[data-category]");
+
     if (!button) return;
 
     activeCategory = button.dataset.category;
 
-    categories.querySelectorAll(".category-tile").forEach(tile => {
-      tile.classList.toggle("active", tile === button);
-    });
+    categories
+      .querySelectorAll(".category-tile")
+      .forEach(tile => {
+        tile.classList.toggle(
+          "active",
+          tile === button
+        );
+      });
 
     renderProducts();
 
@@ -216,12 +310,25 @@
     });
   });
 
-  $("openCart")?.addEventListener("click", openCart);
-  $("closeCart")?.addEventListener("click", closeCart);
-  backdrop?.addEventListener("click", closeCart);
+  $("openCart")?.addEventListener(
+    "click",
+    openCart
+  );
+
+  $("closeCart")?.addEventListener(
+    "click",
+    closeCart
+  );
+
+  backdrop?.addEventListener(
+    "click",
+    closeCart
+  );
 
   document.addEventListener("keydown", event => {
-    if (event.key === "Escape") closeCart();
+    if (event.key === "Escape") {
+      closeCart();
+    }
   });
 
   $("carouselPrev")?.addEventListener("click", () => {
@@ -240,7 +347,7 @@
 
   $("demoCheckout")?.addEventListener("click", () => {
     showNotice(
-      "Démonstration uniquement : les commandes ne sont pas ouvertes."
+      "Démonstration uniquement : aucune commande ni aucun paiement réel."
     );
   });
 
@@ -250,38 +357,46 @@
   menuButton?.addEventListener("click", () => {
     if (!nav) return;
 
-    const isOpen = nav.classList.toggle("mobile-open");
+    const isOpen =
+      nav.classList.toggle("mobile-open");
 
-    Object.assign(nav.style, isOpen
-      ? {
-          display: "flex",
-          position: "absolute",
-          top: "67px",
-          left: "0",
-          right: "0",
-          padding: "18px 24px",
-          background: "#fff",
-          flexDirection: "column",
-          boxShadow: "0 12px 24px rgba(116,75,91,.10)"
-        }
-      : {
-          display: "",
-          position: "",
-          top: "",
-          left: "",
-          right: "",
-          padding: "",
-          background: "",
-          flexDirection: "",
-          boxShadow: ""
-        });
+    Object.assign(nav.style, isOpen ? {
+      display: "flex",
+      position: "absolute",
+      top: "67px",
+      left: "0",
+      right: "0",
+      padding: "18px 24px",
+      background: "#fff",
+      flexDirection: "column",
+      boxShadow: "0 12px 24px rgba(116,75,91,.10)"
+    } : {
+      display: "",
+      position: "",
+      top: "",
+      left: "",
+      right: "",
+      padding: "",
+      background: "",
+      flexDirection: "",
+      boxShadow: ""
+    });
 
-    menuButton.setAttribute("aria-expanded", String(isOpen));
+    menuButton.setAttribute(
+      "aria-expanded",
+      String(isOpen)
+    );
   });
 
   const year = $("year");
-  if (year) year.textContent = String(new Date().getFullYear());
+
+  if (year) {
+    year.textContent = String(
+      new Date().getFullYear()
+    );
+  }
 
   renderProducts();
   renderCart();
+
 })();
