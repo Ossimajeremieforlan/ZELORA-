@@ -46,4 +46,28 @@
 .footer-brand > span:last-child { font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600; letter-spacing: 2.5px; color: var(--rose-dark); }
 @media(max-width:640px) {
   .brand > span:last-child { font-size: 25px; letter-spacing: 2.5px; }
+}  /* Taille du logo ZELORA */
+.brand-logo {
+  display: block;
+  width: 150px;
+  max-width: 40vw;
+  height: auto;
+  object-fit: contain;
 }
+
+.footer-brand .brand-logo {
+  width: 130px;
+  max-width: 45vw;
+}
+
+@media (max-width: 640px) {
+  .brand-logo {
+    width: 120px;
+    max-width: 38vw;
+  }
+
+  .footer-brand .brand-logo {
+    width: 110px;
+    max-width: 42vw;
+  }
+  }
