@@ -70,4 +70,57 @@
     width: 110px;
     max-width: 42vw;
   }
+  } /* CORRECTION AFFICHAGE MOBILE ZELORA */
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.site-header,
+main,
+.hero,
+.section,
+.site-footer {
+  width: 100%;
+  max-width: 100%;
+}
+
+.brand-logo {
+  display: block;
+  width: 130px;
+  max-width: 40vw;
+  height: auto;
+  object-fit: contain;
+}
+
+.footer-brand .brand-logo {
+  width: 130px;
+}
+
+@media (max-width: 640px) {
+  .brand-logo,
+  .footer-brand .brand-logo {
+    width: 115px;
+    max-width: 40vw;
   }
+
+  .hero {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hero-copy,
+  .hero-art {
+    min-width: 0;
+  }
+
+  .product-carousel {
+    grid-auto-columns: 85%;
+  }
+                              }
