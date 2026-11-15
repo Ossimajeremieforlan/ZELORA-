@@ -1,3 +1,4 @@
+
 /* =========================================
    ZELORA — Catalogue, recherche et panier
    Prix indicatifs en FCFA — démonstration
@@ -85,19 +86,16 @@
 
     grid.innerHTML = filtered.map(product => `
       <article class="product-card">
-
         <div class="product-visual">
           <span class="visual-symbol" aria-hidden="true">
             ${product.symbol}
           </span>
-
           <span class="visual-label">
             ZELORA · VISUEL PROVISOIRE
           </span>
         </div>
 
         <div class="product-info">
-
           <span class="product-category">
             ${escapeHTML(product.category)}
           </span>
@@ -109,7 +107,6 @@
           </p>
 
           <div class="product-bottom">
-
             <span class="product-price">
               ${money(product.price)}
             </span>
@@ -120,7 +117,6 @@
               data-add="${product.id}">
               Ajouter au panier
             </button>
-
           </div>
         </div>
       </article>
@@ -169,7 +165,6 @@
 
           return `
             <div class="cart-row">
-
               <div class="cart-thumb" aria-hidden="true">
                 ${product.symbol}
               </div>
@@ -180,7 +175,6 @@
               </div>
 
               <div class="quantity-controls">
-
                 <button
                   type="button"
                   data-minus="${id}"
@@ -196,7 +190,6 @@
                   aria-label="Ajouter un exemplaire">
                   +
                 </button>
-
               </div>
             </div>
           `;
@@ -345,10 +338,43 @@
     });
   });
 
+  // COMMANDE WHATSAPP
   $("demoCheckout")?.addEventListener("click", () => {
-    showNotice(
-      "Démonstration uniquement : aucune commande ni aucun paiement réel."
-    );
+    const rows = [...cart.entries()];
+
+    if (!rows.length) {
+      showNotice("Votre panier est vide. Ajoutez d'abord un article.");
+      return;
+    }
+
+    const orderLines = rows.map(([id, amount]) => {
+      const product = products.find(item => item.id === id);
+
+      return product
+        ? `- ${product.name} x${amount} : ${money(product.price * amount)}`
+        : "";
+    }).filter(Boolean);
+
+    const orderTotal = rows.reduce((sum, [id, amount]) => {
+      const product = products.find(item => item.id === id);
+
+      return sum + (product ? product.price * amount : 0);
+    }, 0);
+
+    const message = [
+      "Bonjour ZELORA ! Je souhaite passer cette commande :",
+      "",
+      ...orderLines,
+      "",
+      `Total indicatif : ${money(orderTotal)}`,
+      "",
+      "Merci de me confirmer la disponibilité, les frais de livraison et les modalités de paiement."
+    ].join("\n");
+
+    const whatsappUrl =
+      "https://wa.me/24102779932?text=" + encodeURIComponent(message);
+
+    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
   });
 
   const menuButton = $("menuButton");
@@ -400,3 +426,4 @@
   renderCart();
 
 })();
+
