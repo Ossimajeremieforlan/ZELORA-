@@ -183,6 +183,69 @@
         <div>
           <p class="eyebrow">INFORMATIONS IMPORTANTES</p>
           <h2>Livraison, paiement &amp; conditions d’achat</h2>
+          
+<section class="section" id="proposer-produit">
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">ESPACE VENDEURS</p>
+      <h2>Proposez vos articles sur ZELORA</h2>
+      <p>Présentez vos produits à notre communauté.</p>
+    </div>
+  </div>
+
+  <div class="demo-notice">
+    Remplissez les informations de votre article. Notre équipe recevra votre proposition sur WhatsApp.
+  </div>
+
+  <form id="productProposalForm" class="seller-form">
+    <label>Nom de l'article
+      <input type="text" name="produit" required
+        placeholder="Ex : Sneakers Urban">
+    </label>
+
+    <label>Prix de vente (FCFA)
+      <input type="number" name="prix" min="1" required
+        placeholder="Ex : 15000">
+    </label>
+
+    <label>Catégorie
+      <select name="categorie" required>
+        <option value="">Choisir une catégorie</option>
+        <option>Mode</option>
+        <option>Chaussures</option>
+        <option>Accessoires</option>
+        <option>Sport</option>
+        <option>Beauté</option>
+        <option>Maison</option>
+        <option>Autre</option>
+      </select>
+    </label>
+
+    <label>Description de l'article
+      <textarea name="description" rows="4" required
+        placeholder="Décrivez votre article..."></textarea>
+    </label>
+
+    <label>Photo de l'article
+      <input type="file" name="photo" accept="image/*" required>
+    </label>
+
+    <label>Nom de votre boutique
+      <input type="text" name="boutique" required
+        placeholder="Nom de votre boutique">
+    </label>
+
+    <label>Votre numéro WhatsApp
+      <input type="tel" name="telephone" required
+        placeholder="+241 ...">
+    </label>
+
+    <button type="submit" class="button button-primary full-width">
+      Envoyer mon article
+    </button>
+  </form>
+</section>
+
         </div>
       </div>
 
