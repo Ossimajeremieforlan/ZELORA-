@@ -425,5 +425,27 @@
   renderProducts();
   renderCart();
 
+  // INSCRIPTION DES VENDEURS SUR WHATSAPP
+  $("sellerForm")?.addEventListener("submit", event => {
+    event.preventDefault();
+
+    const form = event.currentTarget;
+    const data = new FormData(form);
+
+    const message = [
+      "Bonjour ZELORA ! Nouvelle candidature vendeur :",
+      "",
+      "Boutique : " + data.get("boutique"),
+      "Responsable : " + data.get("responsable"),
+      "WhatsApp : " + data.get("telephone"),
+      "Ville : " + data.get("ville"),
+      "Catégorie : " + data.get("categorie"),
+      "Présentation : " + (data.get("presentation") || "Non renseignée")
+    ].join("\n");
+
+    const url = "https://wa.me/24102779932?text=" + encodeURIComponent(message);
+    window.open(url, "_blank", "noopener,noreferrer");
+  });
+
 })();
 
