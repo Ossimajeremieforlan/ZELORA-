@@ -123,4 +123,51 @@ main,
   .product-carousel {
     grid-auto-columns: 85%;
   }
-                              }
+                              }  
+.seller-form {
+  max-width: 650px;
+  margin: 0 auto;
+  padding: 25px;
+  background: #fff8fa;
+  border: 1px solid #f0e5e9;
+  border-radius: 10px;
+  display: grid;
+  gap: 17px;
+}
+
+.seller-form label {
+  display: grid;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #785568;
+}
+
+.seller-form input,
+.seller-form select,
+.seller-form textarea {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #ead6df;
+  border-radius: 5px;
+  background: white;
+  color: #40333a;
+  outline: none;
+  font: inherit;
+  font-size: 13px;
+}
+
+.seller-form input:focus,
+.seller-form select:focus,
+.seller-form textarea:focus {
+  border-color: #d58eaa;
+}
+
+.seller-form textarea {
+  resize: vertical;
+}
+
+.seller-form button {
+  margin-top: 5px;
+}
+
