@@ -113,7 +113,62 @@
       <p class="empty-state" id="emptyState" hidden>Aucun article ne correspond à votre recherche. Essayez un autre mot ou une autre catégorie.</p>
     </section>
 
-    <section class="seller-banner" id="vendeurs">
+    
+<a class="button button-light" href="#inscription-vendeur">Devenir vendeur <span>↗</span></a>
+</section>
+
+<section class="section" id="inscription-vendeur">
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">ESPACE PARTENAIRES</p>
+      <h2>Rejoignez la communauté ZELORA</h2>
+    </div>
+  </div>
+
+  <div class="demo-notice">
+    Remplissez les informations de votre boutique. Notre équipe vous contactera pour étudier votre candidature.
+  </div>
+
+  <form id="sellerForm" class="seller-form">
+    <label>Nom de la boutique
+      <input type="text" name="boutique" required placeholder="Ex : Boutique Élégance">
+    </label>
+
+    <label>Nom du responsable
+      <input type="text" name="responsable" required placeholder="Votre nom">
+    </label>
+
+    <label>Numéro WhatsApp
+      <input type="tel" name="telephone" required placeholder="+241 ...">
+    </label>
+
+    <label>Ville
+      <input type="text" name="ville" required placeholder="Ex : Port-Gentil">
+    </label>
+
+    <label>Catégorie de produits
+      <select name="categorie" required>
+        <option value="">Choisir une catégorie</option>
+        <option>Mode</option>
+        <option>Chaussures</option>
+        <option>Accessoires</option>
+        <option>Sport</option>
+        <option>Beauté</option>
+        <option>Maison</option>
+        <option>Autre</option>
+      </select>
+    </label>
+
+    <label>Présentation de votre boutique
+      <textarea name="presentation" rows="4" placeholder="Présentez votre activité..."></textarea>
+    </label>
+
+    <button type="submit" class="button button-primary full-width">
+      Envoyer ma candidature
+    </button>
+  </form>
+</section>
+
       <div class="seller-decoration">Z</div>
       <div>
         <p class="eyebrow">ESPACE PARTENAIRES</p>
