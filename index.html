@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="fr">
 <head>
@@ -13,13 +14,18 @@
   <script src="app.js" defer></script>
 </head>
 <body>
+
   <div class="announcement">BIENVENUE CHEZ ZELORA <span>—</span> Découvrez les boutiques près de chez vous</div>
+
   <header class="site-header">
     <a class="brand" href="#" aria-label="ZELORA, accueil">
       <img class="brand-logo" src="file_000000006874820ebc3ea6b97f349801.png" alt="ZELORA — Your world. One marketplace.">
     </a>
     <nav class="desktop-nav" aria-label="Navigation principale">
-      <a href="#categories">Catégories</a><a href="#produits">Découvrir</a><a href="#vendeurs">Vendeurs</a>
+      <a href="#categories">Catégories</a>
+      <a href="#produits">Découvrir</a>
+      <a href="#vendeurs">Vendeurs</a>
+      <a href="#conditions">Conditions</a>
     </nav>
     <div class="header-actions">
       <label class="search-box" aria-label="Rechercher un produit">
@@ -27,29 +33,40 @@
         <input id="searchInput" type="search" placeholder="Rechercher un article…" autocomplete="off">
       </label>
       <button class="icon-button cart-button" id="openCart" aria-label="Ouvrir le panier">
-        <span aria-hidden="true">♧</span><span class="cart-count" id="cartCount">0</span>
+        <span aria-hidden="true">♧</span>
+        <span class="cart-count" id="cartCount">0</span>
       </button>
       <button class="menu-button" id="menuButton" aria-label="Ouvrir le menu">☰</button>
     </div>
   </header>
 
   <main>
+
     <section class="hero">
       <div class="hero-copy">
         <p class="eyebrow"><span class="eyebrow-dot"></span> LA MARKETPLACE GABONAISE</p>
         <h1>Vos envies.<br><em>Un seul endroit.</em></h1>
         <p class="hero-description">Mode, accessoires, sport, beauté et maison : découvrez les boutiques et les produits qui vous correspondent.</p>
         <div class="hero-note"><span class="note-icon">✦</span> Une nouvelle façon de découvrir les commerces gabonais.</div>
-        </div>
-        <div class="hero-note"><span class="note-icon">✦</span> Une nouvelle façon de découvrir les commerces gabonais.</div>
       </div>
+
       <div class="hero-art" aria-label="Illustration décorative de shopping">
-        <div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
-        <div class="art-card art-card-back"><span>À DÉCOUVRIR</span><b>La sélection<br>du moment</b><i>✧</i></div>
-        <div class="art-bag"><div class="bag-handle"></div><div class="bag-logo">Z</div><div class="bag-label">ZELORA</div></div>
+        <div class="art-orbit orbit-one"></div>
+        <div class="art-orbit orbit-two"></div>
+        <div class="art-card art-card-back">
+          <span>À DÉCOUVRIR</span>
+          <b>La sélection<br>du moment</b>
+          <i>✧</i>
+        </div>
+        <div class="art-bag">
+          <div class="bag-handle"></div>
+          <div class="bag-logo">Z</div>
+          <div class="bag-label">ZELORA</div>
+        </div>
         <div class="floating-tag tag-top">STYLE &amp; IDÉES <span>✦</span></div>
         <div class="floating-tag tag-bottom">TROUVEZ VOTRE BONHEUR</div>
-        <div class="art-sparkle sparkle-one">✳</div><div class="art-sparkle sparkle-two">✧</div>
+        <div class="art-sparkle sparkle-one">✳</div>
+        <div class="art-sparkle sparkle-two">✧</div>
       </div>
     </section>
 
@@ -64,6 +81,7 @@
         <div><p class="eyebrow">PARCOURIR</p><h2>Explorez nos univers</h2></div>
         <p class="section-side-copy">Une sélection de catégories pour<br>toute la famille.</p>
       </div>
+
       <div class="category-grid" id="categoryGrid">
         <button class="category-tile active" data-category="Tout"><span class="category-icon">✧</span><b>Tout voir</b><small>Explorer</small></button>
         <button class="category-tile" data-category="Mode"><span class="category-icon">♧</span><b>Mode</b><small>Vêtements</small></button>
@@ -80,26 +98,71 @@
         <div><p class="eyebrow">À DÉCOUVRIR</p><h2>Quelques idées pour commencer</h2></div>
         <span class="demo-label">EXEMPLES DE PRÉSENTATION</span>
       </div>
-      <div class="demo-notice">Les articles ci-dessous sont des exemples visuels pour tester le site. Ils ne sont pas en vente et leurs prix sont fictifs. Nous les remplacerons par les produits réellement proposés par des vendeurs partenaires.</div>
+
+      <div class="demo-notice">
+        Les articles ci-dessous sont des exemples visuels pour tester le site. Ils ne sont pas en vente et leurs prix sont fictifs. Nous les remplacerons par les produits réellement proposés par des vendeurs partenaires.
+      </div>
+
       <div class="product-carousel-shell">
         <button class="carousel-arrow carousel-prev" id="carouselPrev" aria-label="Défiler vers la gauche">‹</button>
         <div class="product-carousel" id="productGrid" aria-live="polite" tabindex="0" aria-label="Articles à faire défiler"></div>
         <button class="carousel-arrow carousel-next" id="carouselNext" aria-label="Défiler vers la droite">›</button>
       </div>
+
       <div class="carousel-hint"><span>←</span> Faites défiler les articles horizontalement <span>→</span></div>
       <p class="empty-state" id="emptyState" hidden>Aucun article ne correspond à votre recherche. Essayez un autre mot ou une autre catégorie.</p>
     </section>
 
     <section class="seller-banner" id="vendeurs">
       <div class="seller-decoration">Z</div>
-      <div><p class="eyebrow">ESPACE PARTENAIRES</p><h2>Vous avez une boutique ?<br><em>Développez votre visibilité.</em></h2><p>Nous préparons un espace pour permettre aux commerçants de présenter leurs produits sur ZELORA.</p></div>
+      <div>
+        <p class="eyebrow">ESPACE PARTENAIRES</p>
+        <h2>Vous avez une boutique ?<br><em>Développez votre visibilité.</em></h2>
+        <p>Nous préparons un espace pour permettre aux commerçants de présenter leurs produits sur ZELORA.</p>
+      </div>
       <a class="button button-light" href="mailto:contact@zelora.ga?subject=Partenariat%20ZELORA">Manifester mon intérêt <span>↗</span></a>
     </section>
 
+    <!-- LIVRAISON ET CONDITIONS -->
+    <section class="section" id="conditions">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">INFORMATIONS IMPORTANTES</p>
+          <h2>Livraison, paiement &amp; conditions d’achat</h2>
+        </div>
+      </div>
+
+      <div class="demo-notice">
+        <p>
+          <strong>Livraison</strong><br>
+          Les frais de livraison sont à la charge du client. Le vendeur indique le coût avant validation de la commande. Les zones desservies et les délais sont confirmés directement avec lui.
+        </p>
+
+        <p>
+          <strong>Paiement</strong><br>
+          Selon le vendeur, le paiement pourra être effectué à la livraison ou par Mobile Money avant la livraison. Le mode de paiement accepté et le montant total doivent être confirmés avant tout paiement.
+        </p>
+
+        <p>
+          <strong>Commande et réclamation</strong><br>
+          Le vendeur confirme la disponibilité, le prix et les détails de l’article. Le client vérifie les conditions de retour ou d’échange avant de valider. En cas de problème, il contacte rapidement le vendeur afin de convenir d’une solution.
+        </p>
+
+        <p>
+          <strong>À savoir :</strong>
+          ZELORA est encore en phase de démonstration. Ces modalités décrivent le fonctionnement prévu avec les vendeurs partenaires ; elles ne garantissent pas encore la disponibilité des articles ou des services.
+        </p>
+      </div>
+    </section>
+
     <section class="newsletter">
-      <div><p class="eyebrow">RESTONS EN CONTACT</p><h2>La suite de ZELORA<br>se construit avec vous.</h2></div>
+      <div>
+        <p class="eyebrow">RESTONS EN CONTACT</p>
+        <h2>La suite de ZELORA<br>se construit avec vous.</h2>
+      </div>
       <p>Cette première version est une démonstration. Les commandes, paiements et inscriptions vendeurs seront activés après la mise en place de leur système de gestion.</p>
     </section>
+
   </main>
 
   <footer class="site-footer">
@@ -109,11 +172,27 @@
   </footer>
 
   <div class="drawer-backdrop" id="drawerBackdrop" hidden></div>
+
   <aside class="cart-drawer" id="cartDrawer" aria-label="Panier" aria-hidden="true">
-    <div class="drawer-header"><div><p class="eyebrow">VOTRE SÉLECTION</p><h2>Mon panier</h2></div><button class="close-button" id="closeCart" aria-label="Fermer">×</button></div>
+    <div class="drawer-header">
+      <div><p class="eyebrow">VOTRE SÉLECTION</p><h2>Mon panier</h2></div>
+      <button class="close-button" id="closeCart" aria-label="Fermer">×</button>
+    </div>
+
     <div class="cart-items" id="cartItems"></div>
-    <div class="cart-footer"><div class="cart-total"><span>Total indicatif</span><b id="cartTotal">0 FCFA</b></div><p>Panier de démonstration : aucun achat ni paiement réel n'est effectué.</p><button class="button button-primary full-width" id="demoCheckout">Tester le récapitulatif</button></div>
+
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span>Total indicatif</span>
+        <b id="cartTotal">0 FCFA</b>
+      </div>
+      <p>La demande sera transmise sur WhatsApp. Disponibilité, livraison et paiement seront confirmés par le vendeur.</p>
+      <button class="button button-primary full-width" id="demoCheckout">Commander sur WhatsApp</button>
+    </div>
   </aside>
+
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
 </body>
 </html>
+
