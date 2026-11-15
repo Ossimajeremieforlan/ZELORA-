@@ -447,5 +447,31 @@
     window.open(url, "_blank", "noopener,noreferrer");
   });
 
+  // PROPOSITION D'ARTICLES SUR ZELORA
+  $("productProposalForm")?.addEventListener("submit", event => {
+    event.preventDefault();
+
+    const form = event.currentTarget;
+    const data = new FormData(form);
+
+    const message = [
+      "Bonjour ZELORA ! Nouvelle proposition d'article :",
+      "",
+      "Article : " + data.get("produit"),
+      "Prix : " + data.get("prix") + " FCFA",
+      "Catégorie : " + data.get("categorie"),
+      "Description : " + data.get("description"),
+      "Boutique : " + data.get("boutique"),
+      "WhatsApp vendeur : " + data.get("telephone"),
+      "",
+      "Je vais joindre la photo de mon article."
+    ].join("\n");
+
+    const url = "https://wa.me/24102779932?text=" +
+      encodeURIComponent(message);
+
+    window.open(url, "_blank");
+  });
+
 })();
 
