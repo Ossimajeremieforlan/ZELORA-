@@ -50,7 +50,32 @@
       "'": "&#39;"
     })[char]);
 
-  function showNotice(message) {
+  function showNotice(message) {   // CONNEXION À SUPABASE
+  const SUPABASE_URL = "https://nzaejtwmwugtwlzbomov.supabase.co";
+
+  const SUPABASE_KEY = "sb_publishable_qtljYGWgLCLu7N6MLoXelw_D0gw2mz-";
+
+  const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
+
+  // TEST DE CONNEXION
+  (async function testerSupabase() {
+    const { data, error } = await supabaseClient
+      .from("produits")
+      .select("id")
+      .limit(1);
+
+    if (error) {
+      console.error("Erreur Supabase :", error.message);
+      showNotice("Connexion à Supabase à vérifier.");
+      return;
+    }
+
+    console.log("ZELORA est connectée à Supabase !");
+    showNotice("Connexion à Supabase réussie !");
+  })();
     if (!toast) return;
 
     toast.textContent = message;
