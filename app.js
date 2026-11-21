@@ -297,7 +297,52 @@
   const year = $("year");
   if (year) year.textContent = String(new Date().getFullYear());
 
-  $("sellerForm")?.addEventListener("submit", event => {
+  
+$("sellerForm")?.addEventListener("submit", async event => {
+  event.preventDefault();
+
+  const form = event.currentTarget;
+  const data = new FormData(form);
+  const bouton = form.querySelector('button[type="submit"]');
+
+  bouton.disabled = true;
+  bouton.textContent = "Création du compte...";
+
+  try {
+    const { data: result, error } =
+      await supabaseClient.auth.signUp({
+        email: data.get("email").trim(),
+        password: data.get("password"),
+        options: {
+          data: {
+            boutique: data.get("boutique"),
+            responsable: data.get("responsable"),
+            telephone: data.get("telephone"),
+            ville: data.get("ville"),
+            categorie: data.get("categorie"),
+            presentation: data.get("presentation")
+          }
+        }
+      });
+
+    if (error) throw error;
+
+    showNotice(
+      result.session
+        ? "Compte créé ! Boutique en attente de validation."
+        : "Inscription enregistrée ! Vérifiez votre e-mail."
+    );
+
+    form.reset();
+
+  } catch (error) {
+    showNotice("Erreur : " + error.message);
+  } finally {
+    bouton.disabled = false;
+    bouton.textContent = "Envoyer ma candidature";
+  }
+});
+
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
