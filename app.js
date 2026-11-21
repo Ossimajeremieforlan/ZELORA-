@@ -60,10 +60,10 @@
     name: p.nom,
     category: p.categorie || "Autres",
     symbol: "✦",
-    price: Number(p.prix),
+    price: String(p.prix),
     description: p.description || "",
     photo_url: p.photo_url || "",
-    quantity: Number(p.quantite || 0)
+    quantity: String(p.quantite || 0)
   }));
 
   renderProducts();
