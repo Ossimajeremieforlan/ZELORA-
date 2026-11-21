@@ -42,7 +42,33 @@
 
   const cart = new Map();
   let activeCategory = "Tout";
-  let toastTimer;
+  async function loadProducts() {
+  const { data, error } = await supabaseClient
+    .from("produits")
+    .select("id, nom, description, prix, categorie, quantite, photo_url")
+    .eq("statut", "valide")
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    console.error(error);
+    showNotice("Erreur de chargement des produits.");
+    return;
+  }
+
+  products = (data || []).map(p => ({
+    id: String(p.id),
+    name: p.nom,
+    category: p.categorie || "Autres",
+    symbol: "✦",
+    price: Number(p.prix),
+    description: p.description || "",
+    photo_url: p.photo_url || "",
+    quantity: Number(p.quantite || 0)
+  }));
+
+  renderProducts();
+  renderCart();
+}
 
   const escapeHTML = value =>
     String(value).replace(/[&<>"']/g, char => ({
