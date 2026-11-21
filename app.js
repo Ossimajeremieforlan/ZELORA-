@@ -392,9 +392,8 @@ $("sellerForm")?.addEventListener("submit", async event => {
     );
   });
 
-  renderProducts();
   renderCart();
-  testerSupabase();
+loadProducts();
 
 })();
 
