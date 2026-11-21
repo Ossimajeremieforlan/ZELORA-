@@ -15,7 +15,7 @@
   const money = value =>
     `${Number(value).toLocaleString("fr-FR")} FCFA`;
 
-  const products = [
+  let products = [];
     {id:1,name:"T-shirt Essential",category:"Mode",symbol:"✦",price:5000},
     {id:2,name:"Ensemble Streetwear",category:"Mode",symbol:"♧",price:15000},
     {id:3,name:"Chemise classique",category:"Mode",symbol:"◇",price:8000},
