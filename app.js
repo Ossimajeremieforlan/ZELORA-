@@ -343,27 +343,6 @@ $("sellerForm")?.addEventListener("submit", async event => {
   }
 });
 
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-
-    const message = [
-      "Bonjour ZELORA ! Nouvelle candidature vendeur :",
-      "",
-      "Boutique : " + data.get("boutique"),
-      "Responsable : " + data.get("responsable"),
-      "WhatsApp : " + data.get("telephone"),
-      "Ville : " + data.get("ville"),
-      "Catégorie : " + data.get("categorie"),
-      "Présentation : " + (data.get("presentation") || "Non renseignée")
-    ].join("\n");
-
-    window.open(
-      "https://wa.me/24102779932?text=" + encodeURIComponent(message),
-      "_blank",
-      "noopener,noreferrer"
-    );
-  });
-
   $("productProposalForm")?.addEventListener("submit", event => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
