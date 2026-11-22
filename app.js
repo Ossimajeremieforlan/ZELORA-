@@ -16,20 +16,7 @@
     `${Number(value).toLocaleString("fr-FR")} FCFA`;
 
   let products = [];
-    {id:1,name:"T-shirt Essential",category:"Mode",symbol:"✦",price:5000},
-    {id:2,name:"Ensemble Streetwear",category:"Mode",symbol:"♧",price:15000},
-    {id:3,name:"Chemise classique",category:"Mode",symbol:"◇",price:8000},
-    {id:4,name:"Sneakers Urban",category:"Chaussures",symbol:"◒",price:18000},
-    {id:5,name:"Baskets Sport",category:"Chaussures",symbol:"◉",price:15000},
-    {id:6,name:"Sac tendance",category:"Accessoires",symbol:"▱",price:10000},
-    {id:7,name:"Casquette Premium",category:"Accessoires",symbol:"⌂",price:4000},
-    {id:8,name:"Ensemble sportif",category:"Sport",symbol:"⚽",price:12000},
-    {id:9,name:"Maillot de sport",category:"Sport",symbol:"✧",price:8000},
-    {id:10,name:"Soin beauté",category:"Beauté",symbol:"❀",price:5000},
-    {id:11,name:"Accessoire beauté",category:"Beauté",symbol:"✿",price:3000},
-    {id:12,name:"Décoration maison",category:"Maison",symbol:"⌂",price:7000}
-  ];
-
+  
   const grid = $("productGrid");
   const search = $("searchInput");
   const categories = $("categoryGrid");
