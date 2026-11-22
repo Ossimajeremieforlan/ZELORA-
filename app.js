@@ -192,7 +192,7 @@
     const button = event.target.closest("[data-add]");
     if (!button) return;
 
-    const id = Number(button.dataset.add);
+    const id = String(button.dataset.add);
     cart.set(id, (cart.get(id) || 0) + 1);
     renderCart();
     showNotice("Article ajouté au panier.");
@@ -203,12 +203,12 @@
     const minus = event.target.closest("[data-minus]");
 
     if (plus) {
-      const id = Number(plus.dataset.plus);
+      const id = String(plus.dataset.plus);
       cart.set(id, (cart.get(id) || 0) + 1);
     }
 
     if (minus) {
-      const id = Number(minus.dataset.minus);
+      const id = String(minus.dataset.minus);
       const next = (cart.get(id) || 0) - 1;
       if (next <= 0) cart.delete(id);
       else cart.set(id, next);
