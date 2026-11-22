@@ -130,8 +130,8 @@
           <span class="product-category">${escapeHTML(product.category)}</span>
           <h3>${escapeHTML(product.name)}</h3>
           <p class="product-note">
-            Visuel de présentation — article à confirmer auprès d'un vendeur
-          </p>
+  ${escapeHTML(product.description || "Article proposé sur ZELORA")}
+</p>
           <div class="product-bottom">
             <span class="product-price">${money(product.price)}</span>
             <button class="add-button" type="button" data-add="${product.id}">
