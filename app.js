@@ -16,7 +16,7 @@
     `${Number(value).toLocaleString("fr-FR")} FCFA`;
 
   let products = [];
-  
+ let toastTimer; 
   const grid = $("productGrid");
   const search = $("searchInput");
   const categories = $("categoryGrid");
