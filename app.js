@@ -463,8 +463,7 @@ $("sellerForm")?.addEventListener("submit", async event => {
     button.textContent = "Envoyer mon article";
   }
 });
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
+    
 
     const message = [
       "Bonjour ZELORA ! Nouvelle proposition d'article :",
