@@ -363,7 +363,80 @@ $("sellerForm")?.addEventListener("submit", async event => {
   }
 });
 
-  $("productProposalForm")?.addEventListener("submit", event => {
+  $("productProposalForm")?.addEventListener("submit", async event => {
+  event.preventDefault();
+
+  const form = event.currentTarget;
+  const data = new FormData(form);
+  const button = form.querySelector('button[type="submit"]');
+  const file = data.get("photo");
+
+  button.disabled = true;
+  button.textContent = "Envoi...";
+
+  try {
+    const { data: userData, error: userError } =
+      await supabaseClient.auth.getUser();
+
+    if (userError) throw userError;
+
+    const user = userData.user;
+
+    if (!user) {
+      throw new Error("Connectez-vous d'abord comme vendeur.");
+    }
+
+    if (!(file instanceof File) || !file.size) {
+      throw new Error("Ajoutez une photo.");
+    }
+
+    if (!file.type.startsWith("image/")) {
+      throw new Error("Le fichier doit être une image.");
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+      throw new Error("La photo ne doit pas dépasser 5 Mo.");
+    }
+
+    const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, "-");
+    const filePath = `${user.id}/${Date.now()}-${safeName}`;
+
+    const { error: uploadError } = await supabaseClient.storage
+      .from("product-images")
+      .upload(filePath, file);
+
+    if (uploadError) throw uploadError;
+
+    const { data: publicData } = supabaseClient.storage
+      .from("product-images")
+      .getPublicUrl(filePath);
+
+    const { error: insertError } = await supabaseClient
+      .from("produits")
+      .insert({
+        vendeur_id: user.id,
+        nom: String(data.get("produit")).trim(),
+        description: String(data.get("description")).trim(),
+        prix: Number(data.get("prix")),
+        categorie: data.get("categorie"),
+        quantite: Number(data.get("quantite")),
+        photo_url: publicData.publicUrl,
+        statut: "en_attente"
+      });
+
+    if (insertError) throw insertError;
+
+    showNotice("Article envoyé ! En attente de validation.");
+    form.reset();
+
+  } catch (error) {
+    console.error(error);
+    showNotice("Erreur : " + error.message);
+  } finally {
+    button.disabled = false;
+    button.textContent = "Envoyer mon article";
+  }
+});
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
