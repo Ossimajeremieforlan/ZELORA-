@@ -116,7 +116,6 @@
     grid.innerHTML = filtered.map(product => `
       <article class="product-card">
         <div class="product-visual">
-        <div class="product-visual">
   ${
     product.photo_url && /^https?:\/\//i.test(product.photo_url)
       ? `<img src="${escapeHTML(product.photo_url)}"
