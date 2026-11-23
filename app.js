@@ -465,25 +465,6 @@ $("sellerForm")?.addEventListener("submit", async event => {
 });
     
 
-    const message = [
-      "Bonjour ZELORA ! Nouvelle proposition d'article :",
-      "",
-      "Article : " + data.get("produit"),
-      "Prix : " + data.get("prix") + " FCFA",
-      "Catégorie : " + data.get("categorie"),
-      "Description : " + data.get("description"),
-      "Boutique : " + data.get("boutique"),
-      "WhatsApp vendeur : " + data.get("telephone"),
-      "",
-      "Je vais joindre la photo de mon article."
-    ].join("\n");
-
-    window.open(
-      "https://wa.me/24102779932?text=" + encodeURIComponent(message),
-      "_blank"
-    );
-  });
-
   renderCart();
 loadProducts();
 
