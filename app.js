@@ -317,9 +317,34 @@
   const year = $("year");
   if (year) year.textContent = String(new Date().getFullYear());
 
-  
-$("sellerForm")?.addEventListener("submit", async event => {
+  $("sellerLoginForm")?.addEventListener("submit", async event => {
   event.preventDefault();
+
+  const form = event.currentTarget;
+  const data = new FormData(form);
+  const button = form.querySelector('button[type="submit"]');
+
+  button.disabled = true;
+  button.textContent = "Connexion...";
+
+  try {
+    const { error } = await supabaseClient.auth.signInWithPassword({
+      email: String(data.get("email")).trim(),
+      password: data.get("password")
+    });
+
+    if (error) throw error;
+
+    showNotice("Connexion réussie ! Vous pouvez proposer vos articles.");
+    form.reset();
+
+  } catch (error) {
+    showNotice("Erreur : " + error.message);
+  } finally {
+    button.disabled = false;
+    button.textContent = "Se connecter";
+  }
+});
 
   const form = event.currentTarget;
   const data = new FormData(form);
