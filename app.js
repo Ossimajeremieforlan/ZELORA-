@@ -345,7 +345,8 @@
     button.textContent = "Se connecter";
   }
 });
-
+$("sellerForm")?.addEventListener("submit", async event => {
+  event.preventDefault();
   const form = event.currentTarget;
   const data = new FormData(form);
   const bouton = form.querySelector('button[type="submit"]');
