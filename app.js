@@ -29,33 +29,43 @@
 
   const cart = new Map();
   let activeCategory = "Tout";
-  async function loadProducts() {
-  const { data, error } = await supabaseClient
-    .from("produits")
-    .select("id, nom, description, prix, categorie, quantite, photo_url")
-    .eq("statut", "valide")
-    .order("created_at", { ascending: false });
+    products = [
+    {
+      id: "zelora-tshirt-noir",
+      name: "T-shirt ZELORA noir",
+      category: "Mode",
+      symbol: "✦",
+      price: 7000,
+      description: "T-shirt noir avec le logo blanc ZELORA sur la poitrine.",
+      photo_url: "images/produits/tshirt-zelora-noir.jpg",
+      quantity: 10
+    },
+    {
+      id: "zelora-polo-blanc",
+      name: "Polo ZELORA blanc",
+      category: "Mode",
+      symbol: "✦",
+      price: 8000,
+      description: "Polo blanc élégant avec le logo ZELORA.",
+      photo_url: "images/produits/polo-zelora-blanc.jpg",
+      quantity: 10
+    },
+    {
+      id: "zelora-baskets-blanches",
+      name: "Baskets ZELORA blanches",
+      category: "Chaussures",
+      symbol: "✦",
+      price: 15000,
+      description: "Baskets blanches au style élégant.",
+      photo_url: "images/produits/baskets-zelora-blanches.jpg",
+      quantity: 6
+    }
+  ];
 
-  if (error) {
-    console.error(error);
-    showNotice("Erreur de chargement des produits.");
-    return;
+  function loadProducts() {
+    renderProducts();
+    renderCart();
   }
-
-  products = (data || []).map(p => ({
-    id: String(p.id),
-    name: p.nom,
-    category: p.categorie || "Autres",
-    symbol: "✦",
-    price: String(p.prix),
-    description: p.description || "",
-    photo_url: p.photo_url || "",
-    quantity: String(p.quantite || 0)
-  }));
-
-  renderProducts();
-  renderCart();
-}
 
   const escapeHTML = value =>
     String(value).replace(/[&<>"']/g, char => ({
