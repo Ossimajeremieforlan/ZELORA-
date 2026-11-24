@@ -29,25 +29,25 @@
 
   const cart = new Map();
   let activeCategory = "Tout";
-    products = [
+      products = [
     {
       id: "zelora-tshirt-noir",
       name: "T-shirt ZELORA noir",
       category: "Mode",
       symbol: "✦",
       price: 7000,
-      description: "T-shirt noir avec le logo blanc ZELORA sur la poitrine.",
-      photo_url: "images/produits/tshirt-zelora-noir.jpg",
+      description: "T-shirt noir ZELORA.",
+      photo_url: "images/produits/file_00000000130081f4884fe8e276391ca8.png",
       quantity: 10
     },
     {
-      id: "zelora-polo-blanc",
-      name: "Polo ZELORA blanc",
+      id: "zelora-tshirt-blanc",
+      name: "T-shirt ZELORA blanc",
       category: "Mode",
       symbol: "✦",
       price: 8000,
-      description: "Polo blanc élégant avec le logo ZELORA.",
-      photo_url: "images/produits/polo-zelora-blanc.jpg",
+      description: "T-shirt blanc ZELORA.",
+      photo_url: "images/produits/file_000000009a6c81f4812ebf441fe31256.png",
       quantity: 10
     },
     {
@@ -56,8 +56,8 @@
       category: "Chaussures",
       symbol: "✦",
       price: 15000,
-      description: "Baskets blanches au style élégant.",
-      photo_url: "images/produits/baskets-zelora-blanches.jpg",
+      description: "Baskets blanches élégantes.",
+      photo_url: "images/produits/file_000000000ddc81f49fb461c0bafb46bc.png",
       quantity: 6
     }
   ];
@@ -131,7 +131,7 @@
       ? `<img src="${escapeHTML(product.photo_url)}"
           alt="${escapeHTML(product.name)}"
           style="width:100%;height:100%;object-fit:cover">`
-      : `<span class="visual-symbol">${product.symbol}</span>`
+      : }`<span class="visual-symbol">${product.symbol}</span>`
   <span class="visual-label">ZELORA</span>
 </div>
         <div class="product-info">
