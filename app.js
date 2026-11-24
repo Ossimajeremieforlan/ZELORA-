@@ -125,15 +125,16 @@
 
     grid.innerHTML = filtered.map(product => `
       <article class="product-card">
-        <div class="product-visual">
-  ${
-        product.photo_url
-      ? `<img src="${escapeHTML(product.photo_url)}"
-          alt="${escapeHTML(product.name)}"
-          style="width:100%;height:100%;object-fit:cover">`
-      : }`<span class="visual-symbol">${product.symbol}</span>`
-  <span class="visual-label">ZELORA</span>
-</div>
+            <div class="product-visual">
+          ${
+            product.photo_url
+              ? `<img src="${escapeHTML(product.photo_url)}"
+                  alt="${escapeHTML(product.name)}"
+                  style="width:100%;height:100%;object-fit:cover">`
+              : `<span class="visual-symbol">${escapeHTML(product.symbol || "✦")}</span>`
+          }
+          <span class="visual-label">ZELORA</span>
+        </div>
         <div class="product-info">
           <span class="product-category">${escapeHTML(product.category)}</span>
           <h3>${escapeHTML(product.name)}</h3>
